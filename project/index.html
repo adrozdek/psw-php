@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz</title>
+</head>
+<body>
+<form action="form.php" method="POST">
+    <div>
+        <label for="imie">Imię</label>
+        <input id="imie" type="text" name="imie">
+    </div>
+    <div>
+        <label for="nazwisko">Nazwisko</label>
+        <input id="nazwisko" type="text" name="nazwisko">
+    </div>
+    <div>
+        <label for="numerek">Szczęśliwy numerek</label>
+        <input id="numerek" type="number" name="numerek">
+    </div>
+    <div>
+        <label for="telefon">Telefon</label>
+        <input id="telefon" type="text" name="telefon">
+    </div>
+    <div>
+        <fieldset>
+            <legend>Wybierz płeć:</legend>
+            <input type="radio" name="plec" id="kobieta" value="kobieta">
+            <label for="kobieta">Kobieta</label>
+            <input type="radio" name="plec" id="mezczyzna" value="mezczyzna">
+            <label for="mezczyzna">Mężczyzna</label>
+        </fieldset>
+    </div>
+    <div>
+        <textarea name="longText" rows="4" cols="50" maxlength="200"
+                  placeholder="Wpisz wiadomość bez używania literki a"></textarea>
+    </div>
+    <button type="reset">Wyczyść</button>
+    <button type="submit">Wyślij</button>
+</form>
+</body>
+</html>
