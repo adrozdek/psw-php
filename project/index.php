@@ -1,10 +1,11 @@
 <?php
 require_once 'connections.php';
+define("COOKIE_EXPIRES", 2 * 24 * 60 * 60);
 $users = require_once 'users.php';
-$theme = $_COOKIE['theme'];
+$theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0; 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $theme = $_POST['theme'];
-    setcookie('theme', $theme, time() + 2 * 24 * 60 * 60);
+    setcookie('theme', $theme, time() + COOKIE_EXPIRES);
 }
 ?>
 <!DOCTYPE html>

@@ -6,7 +6,7 @@ if (!isset($_SESSION['userId']) || array_search($_SESSION['userId'], array_colum
 } ?>
 <?php $animals = require_once 'animals.php'; ?>
 <?php $transports = require_once 'transport.php'; ?>
-<?php $theme = $_COOKIE['theme']; ?>
+<?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
