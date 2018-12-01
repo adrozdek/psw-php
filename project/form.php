@@ -6,9 +6,9 @@ $replace = ['a' => 'z', 'b' => 'm', 'r' => 'g', 'c' => 'i', 'm' => 'h', 's' => '
 $happyNumber = 0;
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $isLongVersion = $_POST['type'] === 'long';
+    $isLongVersion = isset($_POST['type']) ? $_POST['type'] === 'long' : false;
     $firstName = $_POST['imie'];
-    if (strcasecmp($firstName, 'Superdługieimie') > 0) {
+    if (strlen($firstName) > strlen('Superdługieimie')) {
         die('Tak długie imię jest niemożliwe oszukisto');
     }
     if (strncasecmp(ucfirst($firstName), 'A', 1) === 0 ||
@@ -36,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Twój tekst zawiera aż ' . $aMatches . ' a!!!';
         }
     }
+    if (strlen($firstName) === 0 || strlen($lastName) === 0) {
+        $errors[] = 'Nie uzupełniłeś wszystkich pól...';
+    }
 }
 echo 'IP ' . $_SERVER['REMOTE_ADDR'];
 
@@ -46,7 +49,7 @@ function getLetterRegex($element)
 }
 
 ?>
-<?php $theme = $_COOKIE['theme']; ?>
+<?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'default'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

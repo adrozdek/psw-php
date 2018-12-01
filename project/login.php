@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 ?>
-<?php $theme = $_COOKIE['theme']; ?>
+<?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0;  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
     <form action="" method="POST">
         <label for="login">Login:</label>
-        <input type="text" name="login" id="login" value="<?= $_POST['login']; ?>">
+        <input type="text" name="login" id="login" value="<?= isset($_POST['login']) ? $_POST['login'] : ''; ?>">
         <label for="password">Hasło:</label>
         <input type="password" name="password" id="password">
         <button type="submit">Zaloguj</button>
