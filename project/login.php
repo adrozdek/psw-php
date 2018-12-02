@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $error = 'Niepoprawne dane.';
     }
-
 }
 ?>
 <?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0; ?>
