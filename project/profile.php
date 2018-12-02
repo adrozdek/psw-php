@@ -2,7 +2,7 @@
 require_once 'connections.php';
 $users = require_once 'users.php';
 if (!isset($_SESSION['userId']) || array_search($_SESSION['userId'], array_column($users, 'id')) === false) {
-    header('UserId:' . $_SESSION['userId'] . array_search($_SESSION['userId'], array_column($users, 'id')) );
+    header('UserId:' . $_SESSION['userId'] . array_search($_SESSION['userId'], array_column($users, 'id')));
     header('Location: index.php');
 } ?>
 
@@ -17,10 +17,23 @@ if (!isset($_SESSION['userId']) || array_search($_SESSION['userId'], array_colum
 <body class="<?= $theme; ?>">
 <?= require_once 'menu.php'; ?>
 <div class="content">
-        Witaj! Twój login to:
-        <div style="background-color: black; color: red; font-size: 25px; width: 100%; height: 90%; text-align: center">
-            <?= ucfirst($users[array_search($_SESSION['userId'], array_column($users, 'id'))]['login']); ?>
-        </div>
+    Witaj! Twój login to:
+    <div style="background-color: black; color: red; font-size: 25px; width: 100%; height: 90%; text-align: center">
+        <?= ucfirst($users[array_search($_SESSION['userId'], array_column($users, 'id'))]['login']); ?>
+    </div>
+    <div>
+        <?php $test = "3.10 coś"; ?>
+        <h3>Test: <?= $test; ?></h3>
+        Konwersja typów: settype($test, 'int')
+        <?php settype($test, 'int'); ?><br>
+        Test: <?= $test; ?>
+    </div>
+    <div>
+        <?php $test = "3.10 coś"; ?>
+        <h3>Test: <?= $test; ?></h3>
+        Rzutowanie: <?= (int)$test; ?><br>
+        Test: <?= $test; ?>
+    </div>
 </div>
 </body>
 </html>

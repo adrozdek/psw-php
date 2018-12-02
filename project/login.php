@@ -9,6 +9,7 @@ if (isset($_SESSION['userId']) && array_search($_SESSION['userId'], array_column
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $key = array_search($_POST['login'], array_column($users, 'login'));
     if ($key !== false && $users[$key]['password'] === $_POST['password']) {
+        session_regenerate_id();
         $_SESSION['userId'] = $users[$key]['id'];
         header("Location: profile.php");
     } else {
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 ?>
-<?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0;  ?>
+<?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

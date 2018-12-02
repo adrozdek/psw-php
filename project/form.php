@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($firstName) > strlen('Superdługieimie')) {
         die('Tak długie imię jest niemożliwe oszukisto');
     }
+    if (preg_match('/\(/', $firstName)) {
+        $errors[] = 'Imię z nawiasem?';
+    }
     if (strncasecmp(ucfirst($firstName), 'A', 1) === 0 ||
         strncasecmp(ucfirst($firstName), 'N', 1) === 0) {
         echo 'Jak słodko! Twoje imię zaczyna się tak samo jak jednej z autorek.';
@@ -22,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (preg_match('/^\p{Ll}/u', $lastName)) {
         $errors[] = 'Nazwisko z małej litery? (preg matchem)';
     }
+    $happyNumber = (int)$_POST['numerek'];
+    if ($happyNumber < 0 || $happyNumber > 50) {
+        $errors[] = 'Szczęśliwy numerek może być tylko 0-50! - Bo tak.';
+    }
     if ($isLongVersion) {
-        $happyNumber = (int)$_POST['numerek'];
-        if ($happyNumber < 0 || $happyNumber > 50) {
-            $errors[] = 'Szczęśliwy numerek może być tylko 0-50! - Bo tak.';
-        }
         $chosenFruit = $_POST['owoc'];
         if (!in_array($chosenFruit, $trueFruits)) {
             $errors[] = 'Twój owoc nie jest dobry! Rozszyfruj listę.';
@@ -49,6 +52,7 @@ function getLetterRegex($element)
 }
 
 ?>
+<?php $users = require_once 'users.php'; ?>
 <?php $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'default'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +62,7 @@ function getLetterRegex($element)
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body class="<?= $theme; ?>">
+<?= require_once 'menu.php'; ?>
 <div class="content">
 
     <?php if (!empty($errors)) : ?>
@@ -96,6 +101,17 @@ function getLetterRegex($element)
             </a>
         </p>
     <?php endif; ?>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $firstName = $_POST['imie'];
+        if (strncasecmp(ucfirst($firstName), 'A', 1) === 0 ||
+            strncasecmp(ucfirst($firstName), 'N', 1) === 0) {
+            echo 'Jak słodko! Twoje imię zaczyna się tak samo jak jednej z autorek.';
+        }
+    }
+    echo 'IP ' . $_SERVER['REMOTE_ADDR'];
+    ?>
 </div>
+
 </body>
 </html>
